@@ -13,17 +13,13 @@ final class Item implements UpdatableItem
 
     public function update(): void
     {
-        if ($this->getQuality() > 0) {
-            $this->setQuality($this->getQuality() - 1);
+        $this->sell_in--;
+        $speed = -1;
+        if ($this->sell_in <= 0) {
+            $speed = -2;
         }
 
-        $this->setSellIn($this->getSellIn() - 1);
-
-        if ($this->getSellIn() < 0) {
-            if ($this->getQuality() > 0) {
-                $this->setQuality($this->getQuality() - 1);
-            }
-        }
+        $this->quality = max(0, $this->quality + $speed);
     }
 
     public function getSellIn(): int

@@ -15,15 +15,13 @@ final class AgedBrie implements UpdatableItem
 
     public function update(): void
     {
-        if ($this->quality < 50) {
-            $this->quality++;
-        }
-
         $this->sell_in--;
-
-        if ($this->quality < 50 && $this->sell_in < 0) {
-            $this->quality++;
+        $speed = 1;
+        if ($this->sell_in <= 0) {
+            $speed = 2;
         }
+
+        $this->quality = min($this->quality + $speed, 50);
     }
 
     public function getSellIn(): int

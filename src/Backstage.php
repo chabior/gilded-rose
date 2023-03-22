@@ -15,23 +15,23 @@ class Backstage implements UpdatableItem
 
     public function update(): void
     {
-        if ($this->quality < 50) {
-            $this->quality++;
-
-            if ($this->getSellIn() < 11) {
-                $this->quality++;
-            }
-
-            if ($this->getSellIn() < 6) {
-                $this->quality++;
-            }
-        }
-
         $this->sell_in--;
-
-        if ($this->sell_in < 0) {
+        if ($this->sell_in <= 0) {
             $this->quality = 0;
+            return;
         }
+
+        $speed = 1;
+
+        if ($this->sell_in <= 9) {
+            $speed = 2;
+        }
+
+        if ($this->sell_in <= 5) {
+            $speed = 3;
+        }
+
+        $this->quality = min($this->quality + $speed, 50);
     }
 
     public function getSellIn(): int
