@@ -4,7 +4,7 @@ namespace App;
 
 final class GildedRose
 {
-    public function updateQuality(Item $item): void
+    public function updateQuality(UpdatableItem $item): void
     {
         $item->update();
     }

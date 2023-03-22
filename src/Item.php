@@ -2,7 +2,7 @@
 
 namespace App;
 
-final class Item
+final class Item implements UpdatableItem
 {
     public function __construct(
         private readonly string $name,
@@ -13,51 +13,15 @@ final class Item
 
     public function update(): void
     {
-        if ($this->getName() != 'Aged Brie' and $this->getName() != 'Backstage passes to a TAFKAL80ETC concert') {
-            if ($this->getQuality() > 0) {
-                if ($this->getName() != 'Sulfuras, Hand of Ragnaros') {
-                    $this->setQuality($this->getQuality() - 1);
-                } else {
-                    $this->setQuality(80);
-                }
-            }
-        } else {
-            if ($this->getQuality() < 50) {
-                $this->setQuality($this->getQuality() + 1);
-                if ($this->getName() == 'Backstage passes to a TAFKAL80ETC concert') {
-                    if ($this->getSellIn() < 11) {
-                        if ($this->getQuality() < 50) {
-                            $this->setQuality( $this->getQuality() + 1);
-                        }
-                    }
-                    if ($this->getSellIn() < 6) {
-                        if ($this->getQuality() < 50) {
-                            $this->setQuality($this->getQuality() + 1);
-                        }
-                    }
-                }
-            }
+        if ($this->getQuality() > 0) {
+            $this->setQuality($this->getQuality() - 1);
         }
 
-        if ($this->getName() != 'Sulfuras, Hand of Ragnaros') {
-            $this->setSellIn($this->getSellIn() - 1);
-        }
+        $this->setSellIn($this->getSellIn() - 1);
 
         if ($this->getSellIn() < 0) {
-            if ($this->getName() != 'Aged Brie') {
-                if ($this->getName() != 'Backstage passes to a TAFKAL80ETC concert') {
-                    if ($this->getQuality() > 0) {
-                        if ($this->getName() != 'Sulfuras, Hand of Ragnaros') {
-                            $this->setQuality($this->getQuality() - 1);
-                        }
-                    }
-                } else {
-                    $this->setQuality($this->getQuality() - $this->getQuality());
-                }
-            } else {
-                if ($this->getQuality() < 50) {
-                    $this->setQuality($this->getQuality() + 1);
-                }
+            if ($this->getQuality() > 0) {
+                $this->setQuality($this->getQuality() - 1);
             }
         }
     }

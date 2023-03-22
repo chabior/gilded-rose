@@ -16,7 +16,15 @@ class GildedRoseTest extends TestCase
      */
     public function testUpdateQualityTest($name, $sellIn, $quality, $expectedSellIn, $expectedQuality): void
     {
-        $item = new Item($name, $sellIn, $quality);
+        if ($name === 'Aged Brie') {
+            $item = new \App\AgedBrie($name, $sellIn, $quality);
+        } elseif ($name === 'Backstage passes to a TAFKAL80ETC concert') {
+            $item = new \App\Backstage($name, $sellIn, $quality);
+        } elseif ($name === 'Sulfuras, Hand of Ragnaros') {
+            $item = new \App\Sulfuras($name, $sellIn, $quality);
+        } else {
+            $item = new \App\Item($name, $sellIn, $quality);
+        }
 
         $gildedRose = new GildedRose();
         $gildedRose->updateQuality($item);
