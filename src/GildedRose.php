@@ -8,5 +8,4 @@ final class GildedRose
     {
         $item->update();
     }
-
 }

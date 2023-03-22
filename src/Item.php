@@ -62,12 +62,12 @@ final class Item
         }
     }
 
-    private function getSellIn(): int
+    public function getSellIn(): int
     {
         return $this->sell_in;
     }
 
-    private function getQuality(): int
+    public function getQuality(): int
     {
         return $this->quality;
     }
