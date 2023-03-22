@@ -11,27 +11,78 @@ final class Item
     ) {
     }
 
-    public function getSellIn(): int
+    public function update(): void
+    {
+        if ($this->getName() != 'Aged Brie' and $this->getName() != 'Backstage passes to a TAFKAL80ETC concert') {
+            if ($this->getQuality() > 0) {
+                if ($this->getName() != 'Sulfuras, Hand of Ragnaros') {
+                    $this->setQuality($this->getQuality() - 1);
+                } else {
+                    $this->setQuality(80);
+                }
+            }
+        } else {
+            if ($this->getQuality() < 50) {
+                $this->setQuality($this->getQuality() + 1);
+                if ($this->getName() == 'Backstage passes to a TAFKAL80ETC concert') {
+                    if ($this->getSellIn() < 11) {
+                        if ($this->getQuality() < 50) {
+                            $this->setQuality( $this->getQuality() + 1);
+                        }
+                    }
+                    if ($this->getSellIn() < 6) {
+                        if ($this->getQuality() < 50) {
+                            $this->setQuality($this->getQuality() + 1);
+                        }
+                    }
+                }
+            }
+        }
+
+        if ($this->getName() != 'Sulfuras, Hand of Ragnaros') {
+            $this->setSellIn($this->getSellIn() - 1);
+        }
+
+        if ($this->getSellIn() < 0) {
+            if ($this->getName() != 'Aged Brie') {
+                if ($this->getName() != 'Backstage passes to a TAFKAL80ETC concert') {
+                    if ($this->getQuality() > 0) {
+                        if ($this->getName() != 'Sulfuras, Hand of Ragnaros') {
+                            $this->setQuality($this->getQuality() - 1);
+                        }
+                    }
+                } else {
+                    $this->setQuality($this->getQuality() - $this->getQuality());
+                }
+            } else {
+                if ($this->getQuality() < 50) {
+                    $this->setQuality($this->getQuality() + 1);
+                }
+            }
+        }
+    }
+
+    private function getSellIn(): int
     {
         return $this->sell_in;
     }
 
-    public function getQuality(): int
+    private function getQuality(): int
     {
         return $this->quality;
     }
 
-    public function getName(): string
+    private function getName(): string
     {
         return $this->name;
     }
 
-    public function setQuality(int $quality): void
+    private function setQuality(int $quality): void
     {
         $this->quality = $quality;
     }
 
-    public function setSellIn(int $sell_in): void
+    private function setSellIn(int $sell_in): void
     {
         $this->sell_in = $sell_in;
     }
