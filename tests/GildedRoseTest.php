@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Tests;
+
 use App\GildedRose;
 use App\Item;
+use App\SeasoningData;
+use App\SeasoningPolicyFactory;
 use PHPUnit\Framework\TestCase;
 
 class GildedRoseTest extends TestCase
@@ -16,17 +22,9 @@ class GildedRoseTest extends TestCase
      */
     public function testUpdateQualityTest($name, $sellIn, $quality, $expectedSellIn, $expectedQuality): void
     {
-        if ($name === 'Aged Brie') {
-            $item = new \App\AgedBrie($name, $sellIn, $quality);
-        } elseif ($name === 'Backstage passes to a TAFKAL80ETC concert') {
-            $item = new \App\Backstage($name, $sellIn, $quality);
-        } elseif ($name === 'Sulfuras, Hand of Ragnaros') {
-            $item = new \App\Sulfuras($name, $sellIn, $quality);
-        } else {
-            $item = new \App\Item($name, $sellIn, $quality);
-        }
+        $item = new Item($name, new SeasoningData($sellIn, $quality));
 
-        $gildedRose = new GildedRose();
+        $gildedRose = new GildedRose(new SeasoningPolicyFactory());
         $gildedRose->updateQuality($item);
 
         $this->assertEquals($expectedSellIn, $item->getSellIn());
