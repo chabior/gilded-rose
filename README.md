@@ -1,3 +1,22 @@
+# Solution
+Every Item has a configured seasoning policy which is build at runtime based on Item name.
+The logic how Item is seasoning is defined in **SeasoningPolicyFactory**, which creates a Policy.
+There are two Policies:
+- **NoSeasoningPolicy** defined for a **Sulfuras** which is a special case which quality never changes.
+- **SellInBasedSpeedSeasoningPolicy** a policy that change quality with a speed denoted by number of days we have to sell the item. There is a **SellInBasedSpeedSeasoningPolicyBuilder** builder prepared to make policy configuration easy.
+
+Solution gives us ability to create new Policies without changing existing code.
+
+I skip unit tests for Policies to speed up with the solution as functional tests covers most of the cases.
+
+# How to run:
+- install docker and docker-composer
+- ```make build``` - build the container
+- ```make tests``` - run tests
+- ```make lint``` - run static analysis
+
+# Description
+
 You are given the following task to demonstrate practical code refactoring skills. The `tests` directory contains the tests (surprise) that run in their initial form and they pass correctly. These tests will be the basic tool to control the refactored code. Your task is to refactor the source code - i.e. to make changes that will improve its quality without changing its operation logic. What changes you will introduce, what patterns or good practices you will use - it's up to you. Any improvement in code quality is better than none at all! Remember, however, that at the time of sending back the assignment, all tests must still run correctly.
 
 The task should run in PHP 8.1. The unit tests were written using the phpunit version 9.5 framework and should be run on that. A job description that explains the business logic contained in the class GildedRose.php is below.

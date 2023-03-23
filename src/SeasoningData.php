@@ -14,9 +14,10 @@ final class SeasoningData
 
     public function changeQuality(?int $speed, int $maxQuality): self
     {
-        $quality = $this->quality + $speed;
         if ($speed === null) {
             $quality = 0;
+        } else {
+            $quality = $this->quality + $speed;
         }
 
         $quality = max(0, $quality);
